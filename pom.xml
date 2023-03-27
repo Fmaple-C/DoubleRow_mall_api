@@ -14,6 +14,7 @@
         <module>mall-portal</module>
         <module>mall-common</module>
         <module>mall-mbg</module>
+        <module>mall-security</module>
     </modules>
 
     <groupId>com.mall.doublerow</groupId>
@@ -51,6 +52,7 @@
         <satoken-redis.version>1.34.0</satoken-redis.version>
         <satoken-jwt.version>1.34.0</satoken-jwt.version>
         <fastjson.version>1.2.83</fastjson.version>
+        <satoken-aop.version>1.34.0</satoken-aop.version>
     </properties>
 
     <dependencies>
@@ -171,6 +173,12 @@
                 <groupId>cn.dev33</groupId>
                 <artifactId>sa-token-dao-redis-jackson</artifactId>
                 <version>${satoken-redis.version}</version>
+            </dependency>
+            <!-- Sa-Token 整合 SpringAOP 实现注解鉴权 -->
+            <dependency>
+                <groupId>cn.dev33</groupId>
+                <artifactId>sa-token-spring-aop</artifactId>
+                <version>${satoken-aop.version}</version>
             </dependency>
             <!-- Sa-Token 整合 jwt -->
             <dependency>
