@@ -10,11 +10,11 @@ import lombok.EqualsAndHashCode;
 
 /**
  * <p>
- * 优惠卷表
+ * 优惠券表
  * </p>
  *
  * @author ${author}
- * @since 2023-03-25
+ * @since 2023-03-29
  */
 @Data
   @EqualsAndHashCode(callSuper = false)
@@ -26,7 +26,7 @@ import lombok.EqualsAndHashCode;
       private Long id;
 
       /**
-     * 优惠卷类型；0->全场赠券；1->会员赠券；2->购物赠券；3->注册赠券
+     * 优惠券类型；0->全场赠券；1->会员赠券；2->购物赠券；3->注册赠券
      */
       private Integer type;
 

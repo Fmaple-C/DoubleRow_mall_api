@@ -14,7 +14,7 @@ import lombok.EqualsAndHashCode;
  * </p>
  *
  * @author ${author}
- * @since 2023-03-25
+ * @since 2023-03-29
  */
 @Data
   @EqualsAndHashCode(callSuper = false)
@@ -40,21 +40,6 @@ import lombok.EqualsAndHashCode;
      * 添加到购物车的价格
      */
       private BigDecimal price;
-
-      /**
-     * 销售属性1
-     */
-      private String sp1;
-
-      /**
-     * 销售属性2
-     */
-      private String sp2;
-
-      /**
-     * 销售属性3
-     */
-      private String sp3;
 
       /**
      * 商品主图

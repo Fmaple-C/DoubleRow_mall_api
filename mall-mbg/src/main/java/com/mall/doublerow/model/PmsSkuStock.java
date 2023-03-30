@@ -13,7 +13,7 @@ import lombok.EqualsAndHashCode;
  * </p>
  *
  * @author ${author}
- * @since 2023-03-25
+ * @since 2023-03-29
  */
 @Data
   @EqualsAndHashCode(callSuper = false)
@@ -44,15 +44,6 @@ import lombok.EqualsAndHashCode;
       private Integer lowStock;
 
       /**
-     * 销售属性1
-     */
-      private String sp1;
-
-    private String sp2;
-
-    private String sp3;
-
-      /**
      * 展示图片
      */
       private String pic;
@@ -71,6 +62,11 @@ import lombok.EqualsAndHashCode;
      * 锁定库存
      */
       private Integer lockStock;
+
+      /**
+     * 商品销售属性，json格式
+     */
+      private String spData;
 
 
 }

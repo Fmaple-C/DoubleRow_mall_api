@@ -16,7 +16,7 @@ import lombok.EqualsAndHashCode;
  * </p>
  *
  * @author ${author}
- * @since 2023-03-25
+ * @since 2023-03-29
  */
 @Data
   @EqualsAndHashCode(callSuper = false)
@@ -27,7 +27,10 @@ import lombok.EqualsAndHashCode;
       @TableId(value = "id", type = IdType.AUTO)
       private Long id;
 
-    private String title;
+      /**
+     * 秒杀时间段名称
+     */
+      private String title;
 
       /**
      * 开始日期
@@ -45,7 +48,7 @@ import lombok.EqualsAndHashCode;
       private Integer status;
 
       /**
-     * 秒杀时间段名称
+     * 创建时间
      */
         @TableField(fill = FieldFill.INSERT)
       private LocalDateTime createTime;

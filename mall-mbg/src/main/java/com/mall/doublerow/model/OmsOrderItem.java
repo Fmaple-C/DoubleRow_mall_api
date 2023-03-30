@@ -13,7 +13,7 @@ import lombok.EqualsAndHashCode;
  * </p>
  *
  * @author ${author}
- * @since 2023-03-25
+ * @since 2023-03-29
  */
 @Data
   @EqualsAndHashCode(callSuper = false)
@@ -68,15 +68,6 @@ import lombok.EqualsAndHashCode;
      * 商品分类id
      */
       private Long productCategoryId;
-
-      /**
-     * 商品的销售属性
-     */
-      private String sp1;
-
-    private String sp2;
-
-    private String sp3;
 
       /**
      * 商品促销名称

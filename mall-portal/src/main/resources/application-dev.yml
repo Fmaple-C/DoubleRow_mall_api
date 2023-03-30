@@ -8,9 +8,6 @@ spring:
     username: root
     password: 123456
     driver-class-name: com.mysql.jdbc.Driver
-  mvc:
-    pathmatch:
-      matching-strategy: ANT_PATH_MATCHER
   redis:
     # Redis数据库索引（默认为0）
     database: 1
@@ -37,4 +34,3 @@ logging:
   config:
     classpath:
       logback.xml
-
