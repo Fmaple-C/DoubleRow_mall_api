@@ -43,7 +43,7 @@ public class UmsMemberController {
             return CommonResult.failed();
     }
 
-    @ApiOperation("用户登录")
+    @ApiOperation("用户注册")
     @PostMapping("register")
     public CommonResult register(@Validated @RequestBody UmsMemberVo umsMemberVo) {
         int regitster = umsMemberService.register(umsMemberVo);

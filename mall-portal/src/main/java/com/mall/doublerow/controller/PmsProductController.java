@@ -2,6 +2,7 @@ package com.mall.doublerow.controller;
 
 import com.mall.doublerow.api.CommonPage;
 import com.mall.doublerow.api.CommonResult;
+import com.mall.doublerow.entity.dto.PmsProductCategoryNodeDto;
 import com.mall.doublerow.entity.vo.PmsProductVo;
 import com.mall.doublerow.model.PmsProduct;
 import com.mall.doublerow.service.PmsProductService;
@@ -28,12 +29,12 @@ public class PmsProductController {
     @Autowired
     private PmsProductService productService;
 
-    @ApiOperation("查询商品")
-    @GetMapping("list")
-    public CommonResult<CommonPage<PmsProduct>> getList(PmsProductVo pmsProductvo,
-                                                        @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize,
-                                                        @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum) {
-        List<PmsProduct> productList = productService.list(pmsProductvo, pageSize, pageNum);
-        return CommonResult.success(CommonPage.restPage(productList));
+
+    @ApiOperation("以树形结构获取所有商品分类")
+    @GetMapping("categoryTreeList")
+    @ResponseBody
+    public CommonResult<List<PmsProductCategoryNodeDto>> categoryTreeList() {
+        List<PmsProductCategoryNodeDto> list = productService.categoryTreeList();
+        return CommonResult.success(list);
     }
 }

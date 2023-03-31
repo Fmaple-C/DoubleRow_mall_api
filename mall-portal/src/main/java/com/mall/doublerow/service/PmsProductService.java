@@ -2,6 +2,7 @@ package com.mall.doublerow.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.mall.doublerow.entity.dto.PmsProductCategoryNodeDto;
 import com.mall.doublerow.entity.vo.PmsProductVo;
 import com.mall.doublerow.mapper.PmsProductMapper;
 import com.mall.doublerow.model.PmsProduct;
@@ -19,13 +20,17 @@ import java.util.List;
 public interface PmsProductService extends IService<PmsProduct> {
 
     /**
-     * 根据商品名称或者货号模糊查询
+     * 综合搜索商品
      */
-    List<PmsProduct> list(String keyword);
+    List<PmsProduct> search(String keyword, Long brandId, Long productCategoryId, Integer pageNum, Integer pageSize, Integer sort);
 
     /**
-     * 分页查询商品
+     * 以树形结构获取所有商品分类
      */
-    List<PmsProduct> list(PmsProductVo productQueryParam, Integer pageSize, Integer pageNum);
+    List<PmsProductCategoryNodeDto> categoryTreeList();
 
+    /**
+     * 获取前台商品详情
+     */
+    PmsProduct detail(Long id);
 }

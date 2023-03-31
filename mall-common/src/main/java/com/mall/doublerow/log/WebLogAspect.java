@@ -41,7 +41,7 @@ public class WebLogAspect {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(WebLogAspect.class);
 
-    @Pointcut("execution(public * com.questionnaires.campus.controller.*.*(..))")
+    @Pointcut("execution(public * com.mall.doublerow.controller.*.*(..))")
     public void weblog() {
     }
 
