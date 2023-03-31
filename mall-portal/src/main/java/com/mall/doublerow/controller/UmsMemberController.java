@@ -2,7 +2,8 @@ package com.mall.doublerow.controller;
 
 import cn.dev33.satoken.stp.StpUtil;
 import com.mall.doublerow.api.CommonResult;
-import com.mall.doublerow.entity.vo.UmsMemberLoginVo;
+import com.mall.doublerow.entity.vo.UmsMemberURVo;
+import com.mall.doublerow.entity.vo.UmsMemberVo;
 import com.mall.doublerow.service.UmsMemberService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -33,13 +34,23 @@ public class UmsMemberController {
 
     @ApiOperation("用户登录")
     @PostMapping("login")
-    public CommonResult login(@Validated @RequestBody UmsMemberLoginVo umsMemberVo) {
+    public CommonResult login(@Validated @RequestBody UmsMemberVo umsMemberVo) {
         Map<String, Object> login = umsMemberService.login(umsMemberVo);
         if (login != null) {
             return CommonResult.success(login);
         }
         else
             return CommonResult.failed();
+    }
+
+    @ApiOperation("用户登录")
+    @PostMapping("register")
+    public CommonResult register(@Validated @RequestBody UmsMemberVo umsMemberVo) {
+        int regitster = umsMemberService.register(umsMemberVo);
+        if (regitster == 0)
+            return CommonResult.failed("用户名重复，请重新输入");
+        else
+            return CommonResult.success(null,"注册成功");
     }
 
     @PostMapping("loginout")

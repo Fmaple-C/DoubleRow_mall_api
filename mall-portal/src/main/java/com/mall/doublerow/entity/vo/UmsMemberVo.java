@@ -16,7 +16,7 @@ import javax.validation.constraints.NotEmpty;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class UmsMemberLoginVo {
+public class UmsMemberVo {
 
     @NotEmpty
     @ApiModelProperty(value = "用户名", required = true)

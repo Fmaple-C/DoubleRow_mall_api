@@ -45,7 +45,7 @@ public class BaseSecurityConfig implements WebMvcConfigurer  {
             // 登录校验 -- 拦截所有路由，并排除/userManagement/login" 用于开放登录
             SaRouter
                     .match("/**")    // 拦截的 path 列表，可以写多个 */
-                    .notMatch("/userMember/login","/psmProduct/**")
+                    .notMatch("/userMember/**","/psmProduct/**")
                     .notMatch(getSwagger3Url())
                     // 排除掉的 path 列表，可以写多个
                     .check(r -> StpUtil.checkLogin());        // 要执行的校验动作，可以写完整的 lambda 表达式
