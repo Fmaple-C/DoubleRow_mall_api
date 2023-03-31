@@ -19,6 +19,11 @@ import java.util.List;
 public interface PmsProductService extends IService<PmsProduct> {
 
     /**
+     * 根据商品名称或者货号模糊查询
+     */
+    List<PmsProduct> list(String keyword);
+
+    /**
      * 分页查询商品
      */
     List<PmsProduct> list(PmsProductVo productQueryParam, Integer pageSize, Integer pageNum);

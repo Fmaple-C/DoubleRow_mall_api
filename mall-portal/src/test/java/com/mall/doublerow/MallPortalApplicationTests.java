@@ -1,14 +1,11 @@
 package com.mall.doublerow;
 
-import com.mall.doublerow.entity.vo.UmsMemberVo;
-import com.mall.doublerow.mapper.UmsMemberLevelMapper;
-import com.mall.doublerow.model.UmsMemberLevel;
+import com.mall.doublerow.entity.vo.UmsMemberLoginVo;
 import com.mall.doublerow.service.UmsMemberService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.List;
 import java.util.Map;
 
 @SpringBootTest
@@ -19,7 +16,7 @@ class MallPortalApplicationTests {
 
     @Test
     void testone() {
-        UmsMemberVo admin = new UmsMemberVo("admin", "123456");
+        UmsMemberLoginVo admin = new UmsMemberLoginVo("admin", "123456");
         Map<String, Object>maps = umsMemberService.login(admin);
     }
 

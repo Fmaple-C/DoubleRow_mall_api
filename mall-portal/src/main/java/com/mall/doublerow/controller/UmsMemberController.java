@@ -1,12 +1,8 @@
 package com.mall.doublerow.controller;
 
-import cn.dev33.satoken.annotation.SaCheckLogin;
 import cn.dev33.satoken.stp.StpUtil;
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.mall.doublerow.api.CommonResult;
-import com.mall.doublerow.entity.vo.UmsMemberVo;
-import com.mall.doublerow.model.UmsMember;
+import com.mall.doublerow.entity.vo.UmsMemberLoginVo;
 import com.mall.doublerow.service.UmsMemberService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -18,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -38,7 +33,7 @@ public class UmsMemberController {
 
     @ApiOperation("用户登录")
     @PostMapping("login")
-    public CommonResult login(@Validated @RequestBody UmsMemberVo umsMemberVo) {
+    public CommonResult login(@Validated @RequestBody UmsMemberLoginVo umsMemberVo) {
         Map<String, Object> login = umsMemberService.login(umsMemberVo);
         if (login != null) {
             return CommonResult.success(login);
@@ -47,7 +42,6 @@ public class UmsMemberController {
             return CommonResult.failed();
     }
 
-    @SaCheckLogin
     @PostMapping("loginout")
     public String loginout() {
         StpUtil.logout(1);

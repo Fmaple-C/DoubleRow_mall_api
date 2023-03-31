@@ -27,6 +27,16 @@ public class PmsProductServiceImpl extends ServiceImpl<PmsProductMapper, PmsProd
 
 
     @Override
+    public List<PmsProduct> list(String keyword) {
+
+        QueryWrapper<PmsProduct> wrapper = new QueryWrapper<>();
+        wrapper.like("name",keyword)
+                .or()
+                .like("sub_title",keyword);
+        return pmsProductMapper.selectList(wrapper);
+    }
+
+    @Override
     public List<PmsProduct> list(PmsProductVo pmsProductVo, Integer pageSize, Integer pageNum) {
         PageHelper.startPage(pageNum, pageSize);
         QueryWrapper<PmsProduct> wrapper = new QueryWrapper<>();

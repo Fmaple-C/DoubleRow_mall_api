@@ -3,7 +3,7 @@ package com.mall.doublerow.service.impl;
 import cn.dev33.satoken.stp.StpUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.mall.doublerow.entity.vo.UmsMemberVo;
+import com.mall.doublerow.entity.vo.UmsMemberLoginVo;
 import com.mall.doublerow.mapper.UmsMemberMapper;
 import com.mall.doublerow.model.UmsMember;
 import com.mall.doublerow.service.UmsMemberService;
@@ -26,7 +26,7 @@ public class UmsMemberServiceImpl extends ServiceImpl<UmsMemberMapper, UmsMember
     private UmsMemberMapper umsMemberMapper;
 
     @Override
-    public Map<String, Object> login(UmsMemberVo umsMemberVo) {
+    public Map<String, Object> login(UmsMemberLoginVo umsMemberVo) {
         QueryWrapper<UmsMember> wrapper = new QueryWrapper<>();
         wrapper.select("id","nickname","phone","icon","gender","birthday","city","job","personalized_signature")
                 .eq("username",umsMemberVo.getUsername())
