@@ -17,32 +17,31 @@ import java.time.LocalDateTime;
 @Data
 public class UmsMemberURVo {
 
-    @ApiModelProperty(value = "id")
+    @ApiModelProperty("id")
     private String id;
 
-    @ApiModelProperty(value = "昵称")
+    @ApiModelProperty("昵称")
     private String nickname;
 
-    @ApiModelProperty(value = "手机号码")
+    @ApiModelProperty("手机号码")
     private String phone;
 
-    @ApiModelProperty(value = "头像")
+    @ApiModelProperty("头像")
     private String icon;
 
-    @ApiModelProperty(value = "性别")
-    private Integer gender;
+    @ApiModelProperty("性别")
+    private Long gender;
 
-    @ApiModelProperty(value = "生日")
+    @ApiModelProperty("生日")
     private LocalDate birthday;
 
-    @ApiModelProperty(value = "所做城市")
+    @ApiModelProperty("所做城市")
     private String city;
 
-    @ApiModelProperty(value = "职业")
+    @ApiModelProperty("职业")
     private String job;
 
-    @ApiModelProperty(value = "个性签名")
+    @ApiModelProperty("个性签名")
     private String personalizedSignature;
-
 
 }

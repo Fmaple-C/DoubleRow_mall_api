@@ -15,10 +15,10 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="Mall" target="1.8" />
-      <module name="mall-common" target="8" />
-      <module name="mall-mbg" target="8" />
-      <module name="mall-portal" target="8" />
-      <module name="mall-security" target="8" />
+      <module name="mall-common" target="1.8" />
+      <module name="mall-mbg" target="1.8" />
+      <module name="mall-portal" target="1.8" />
+      <module name="mall-security" target="1.8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
