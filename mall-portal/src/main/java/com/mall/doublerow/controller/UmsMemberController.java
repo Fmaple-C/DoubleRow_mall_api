@@ -18,6 +18,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * @ClassName UserMemberController
  * @Description TODO
@@ -27,7 +30,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Api(tags = "UmsMemberController")
 @Tag(name = "UmsMemberController", description = "用户管理")
 @RestController
-@RequestMapping("user")
+@RequestMapping("userMember")
 public class UmsMemberController {
 
     @Autowired
@@ -36,7 +39,7 @@ public class UmsMemberController {
     @ApiOperation("用户登录")
     @PostMapping("login")
     public CommonResult login(@Validated @RequestBody UmsMemberVo umsMemberVo) {
-        UmsMember login = umsMemberService.login(umsMemberVo);
+        Map<String, Object> login = umsMemberService.login(umsMemberVo);
         if (login != null) {
             return CommonResult.success(login);
         }

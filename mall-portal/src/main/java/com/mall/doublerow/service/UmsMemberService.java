@@ -5,7 +5,10 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.mall.doublerow.entity.vo.UmsMemberVo;
 import com.mall.doublerow.model.UmsMember;
 
+import java.util.List;
+import java.util.Map;
+
 public interface UmsMemberService extends IService<UmsMember> {
 
-    UmsMember login(UmsMemberVo umsMemberVo);
+    Map<String, Object> login(UmsMemberVo umsMemberVo);
 }
