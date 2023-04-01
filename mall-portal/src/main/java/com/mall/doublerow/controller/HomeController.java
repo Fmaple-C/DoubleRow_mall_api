@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
  * @Version 1.0
  */
 @Api(tags = "HomeController")
-@Tag(name = "HomeController",description = "HomeController")
+@Tag(name = "HomeController",description = "首页管理")
 @RestController
 @RequestMapping("home")
 public class HomeController {

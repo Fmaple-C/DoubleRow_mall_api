@@ -36,8 +36,27 @@ public class PmsProductServiceImpl extends ServiceImpl<PmsProductMapper, PmsProd
     @Override
     public List<PmsProduct> search(String keyword, Long brandId, Long productCategoryId, Integer pageNum, Integer pageSize, Integer sort) {
         PageHelper.startPage(pageNum, pageSize);
-
-        return null;
+        QueryWrapper<PmsProduct> wrapper = new QueryWrapper<>();
+        wrapper.eq("delete_status",0)
+                .eq("public_status",1);
+        if (StrUtil.isNotEmpty(keyword))
+            wrapper.like("name",keyword);
+        if (brandId != null)
+            wrapper.eq("brand_id",brandId);
+        if (productCategoryId != null) {
+            wrapper.eq("product_category_id",productCategoryId);
+        }
+        //1->按新品；2->按销量；3->价格从低到高；4->价格从高到低
+        if (sort == 1) {
+            wrapper.orderByDesc("id");
+        } else if (sort == 2) {
+            wrapper.orderByDesc("sale");
+        } else if (sort == 3) {
+            wrapper.orderByDesc("price");
+        } else if (sort == 4) {
+            wrapper.orderByAsc("price");
+        }
+        return pmsProductMapper.selectList(wrapper);
     }
 
     @Override

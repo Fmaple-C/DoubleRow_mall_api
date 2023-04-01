@@ -7,6 +7,8 @@ import com.mall.doublerow.entity.vo.PmsProductVo;
 import com.mall.doublerow.model.PmsProduct;
 import com.mall.doublerow.service.PmsProductService;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +31,19 @@ public class PmsProductController {
     @Autowired
     private PmsProductService productService;
 
+    @ApiOperation(value = "综合搜索、筛选、排序")
+    @ApiImplicitParam(name = "sort", value = "排序字段:0->按相关度；1->按新品；2->按销量；3->价格从低到高；4->价格从高到低",
+            defaultValue = "0", allowableValues = "0,1,2,3,4", paramType = "query", dataType = "integer")
+    @GetMapping("search")
+    public CommonResult<CommonPage<PmsProduct>> search(@RequestParam(required = false) String keyword,
+                               @RequestParam(required = false) Long brandId,
+                               @RequestParam(required = false) Long productCategoryId,
+                               @RequestParam(required = false, defaultValue = "0") Integer pageNum,
+                               @RequestParam(required = false, defaultValue = "5") Integer pageSize,
+                               @RequestParam(required = false, defaultValue = "0") Integer sort) {
+        List<PmsProduct> productList = productService.search(keyword, brandId, productCategoryId, pageNum, pageSize, sort);
+        return CommonResult.success(CommonPage.restPage(productList));
+    }
 
     @ApiOperation("以树形结构获取所有商品分类")
     @GetMapping("categoryTreeList")
