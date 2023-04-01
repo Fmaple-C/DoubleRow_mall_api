@@ -6,7 +6,6 @@ import cn.dev33.satoken.router.SaRouter;
 import cn.dev33.satoken.stp.StpLogic;
 import cn.dev33.satoken.stp.StpUtil;
 import org.springframework.context.annotation.Bean;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.util.ArrayList;
@@ -33,13 +32,22 @@ public class BaseSecurityConfig implements WebMvcConfigurer  {
             // 登录校验 -- 拦截所有路由，并排除/userManagement/login" 用于开放登录
             SaRouter
                     .match("/**")    // 拦截的 path 列表，可以写多个 */
-                    .notMatch("/userMember/*","/psmProduct/*")
+                    .notMatch(getSecurity())
                     .notMatch(getSwagger3Url())
                     // 排除掉的 path 列表，可以写多个
                     .check(r -> StpUtil.checkLogin());        // 要执行的校验动作，可以写完整的 lambda 表达式
             // 根据路由划分模块，不同模块不同鉴权
             // 遍历校验规则，依次鉴权
         });
+    }
+
+    private List<String> getSecurity () {
+        List<String> urls = new ArrayList<>();
+        urls.add("/userMember/login");
+        urls.add("/userMember/register");
+        urls.add("home/**");
+        urls.add("/psmProduct/**");
+        return urls;
     }
 
     private List<String> getSwagger3Url()  {

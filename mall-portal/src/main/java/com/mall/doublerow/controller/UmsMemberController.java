@@ -53,10 +53,11 @@ public class UmsMemberController {
             return CommonResult.success(null,"注册成功");
     }
 
-    @PostMapping("loginout")
-    public String loginout() {
-        StpUtil.logout(1);
-        return "ww";
+    @ApiOperation("用户登出")
+    @PostMapping("loginOut")
+    public CommonResult<Object> loginOut(Long id) {
+        StpUtil.logout(id);
+        return CommonResult.success(null);
     }
 
 }

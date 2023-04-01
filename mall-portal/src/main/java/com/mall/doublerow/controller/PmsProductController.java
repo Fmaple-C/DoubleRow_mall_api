@@ -32,7 +32,6 @@ public class PmsProductController {
 
     @ApiOperation("以树形结构获取所有商品分类")
     @GetMapping("categoryTreeList")
-    @ResponseBody
     public CommonResult<List<PmsProductCategoryNodeDto>> categoryTreeList() {
         List<PmsProductCategoryNodeDto> list = productService.categoryTreeList();
         return CommonResult.success(list);
