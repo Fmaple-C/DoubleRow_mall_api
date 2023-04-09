@@ -2,6 +2,7 @@ package com.mall.doublerow.controller;
 
 import com.mall.doublerow.api.CommonPage;
 import com.mall.doublerow.api.CommonResult;
+import com.mall.doublerow.entity.dto.PmsPortalProductDetailDto;
 import com.mall.doublerow.entity.dto.PmsProductCategoryNodeDto;
 import com.mall.doublerow.entity.vo.PmsProductVo;
 import com.mall.doublerow.model.PmsProduct;
@@ -38,7 +39,7 @@ public class PmsProductController {
     public CommonResult<CommonPage<PmsProduct>> search(@RequestParam(required = false) String keyword,
                                @RequestParam(required = false) Long brandId,
                                @RequestParam(required = false) Long productCategoryId,
-                               @RequestParam(required = false, defaultValue = "0") Integer pageNum,
+                               @RequestParam(required = false, defaultValue = "1") Integer pageNum,
                                @RequestParam(required = false, defaultValue = "5") Integer pageSize,
                                @RequestParam(required = false, defaultValue = "0") Integer sort) {
         List<PmsProduct> productList = productService.search(keyword, brandId, productCategoryId, pageNum, pageSize, sort);
@@ -50,5 +51,12 @@ public class PmsProductController {
     public CommonResult<List<PmsProductCategoryNodeDto>> categoryTreeList() {
         List<PmsProductCategoryNodeDto> list = productService.categoryTreeList();
         return CommonResult.success(list);
+    }
+
+    @ApiOperation("获取前台商品详情")
+    @GetMapping("/detail/{id}")
+    public CommonResult<PmsPortalProductDetailDto> detail(@PathVariable Long id) {
+        PmsPortalProductDetailDto productDetail = productService.detail(id);
+        return CommonResult.success(productDetail);
     }
 }

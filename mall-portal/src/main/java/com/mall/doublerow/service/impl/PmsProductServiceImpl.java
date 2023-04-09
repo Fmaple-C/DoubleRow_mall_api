@@ -1,15 +1,15 @@
 package com.mall.doublerow.service.impl;
 
+import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.pagehelper.PageHelper;
+import com.mall.doublerow.entity.dto.PmsPortalProductDetailDto;
 import com.mall.doublerow.entity.dto.PmsProductCategoryNodeDto;
 import com.mall.doublerow.entity.vo.PmsProductVo;
-import com.mall.doublerow.mapper.PmsProductCategoryMapper;
-import com.mall.doublerow.mapper.PmsProductMapper;
-import com.mall.doublerow.model.PmsProduct;
-import com.mall.doublerow.model.PmsProductCategory;
+import com.mall.doublerow.mapper.*;
+import com.mall.doublerow.model.*;
 import com.mall.doublerow.service.PmsProductService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +31,15 @@ public class PmsProductServiceImpl extends ServiceImpl<PmsProductMapper, PmsProd
     private PmsProductMapper pmsProductMapper;
 
     @Autowired
+    private PmsProductAttributeMapper pmsProductAttributeMapper;
+
+    @Autowired
+    private PmsProductAttributeValueMapper pmsProductAttributeValueMapper;
+
+    @Autowired
+    private PmsSkuStockMapper pmsSkuStockMapper;
+
+    @Autowired
     private PmsProductCategoryMapper pmsProductCategoryMapper;
 
     @Override
@@ -38,7 +47,7 @@ public class PmsProductServiceImpl extends ServiceImpl<PmsProductMapper, PmsProd
         PageHelper.startPage(pageNum, pageSize);
         QueryWrapper<PmsProduct> wrapper = new QueryWrapper<>();
         wrapper.eq("delete_status",0)
-                .eq("public_status",1);
+                .eq("publish_status",1);
         if (StrUtil.isNotEmpty(keyword))
             wrapper.like("name",keyword);
         if (brandId != null)
@@ -71,8 +80,29 @@ public class PmsProductServiceImpl extends ServiceImpl<PmsProductMapper, PmsProd
     }
 
     @Override
-    public PmsProduct detail(Long id) {
-        return null;
+    public PmsPortalProductDetailDto detail(Long id) {
+        PmsPortalProductDetailDto result = new PmsPortalProductDetailDto();
+        //获取商品信息
+        PmsProduct pmsProduct = pmsProductMapper.selectById(id);
+        result.setProduct(pmsProduct);
+        //获取商品属性信息
+        QueryWrapper<PmsProductAttribute> wrapper = new QueryWrapper<>();
+        wrapper.eq("product_attribute_category_id",pmsProduct.getProductAttributeCategoryId());
+        List<PmsProductAttribute> pmsProductAttributes = pmsProductAttributeMapper.selectList(wrapper);
+        result.setProductAttributeList(pmsProductAttributes);
+        //获取商品属性值信息
+        if (CollUtil.isNotEmpty(pmsProductAttributes)) {
+            List<Long> attributeIds = pmsProductAttributes.stream().map(PmsProductAttribute::getId).collect(Collectors.toList());
+            QueryWrapper<PmsProductAttributeValue> productAttributeValueQueryWrapper = new QueryWrapper<>();
+            productAttributeValueQueryWrapper.eq("product_id",pmsProduct.getId());
+            List<PmsProductAttributeValue> pmsProductAttributeValues = pmsProductAttributeValueMapper.selectList(productAttributeValueQueryWrapper);
+            result.setProductAttributeValueList(pmsProductAttributeValues);
+        }
+        QueryWrapper<PmsSkuStock> pmsSkuStockWrapper = new QueryWrapper<>();
+        pmsSkuStockWrapper.eq("product_id",pmsProduct.getId());
+        List<PmsSkuStock> pmsSkuStocks = pmsSkuStockMapper.selectList(pmsSkuStockWrapper);
+        result.setSkuStockList(pmsSkuStocks);
+        return result;
     }
 
     /**
