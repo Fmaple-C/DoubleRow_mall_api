@@ -1,5 +1,6 @@
 package com.mall.doublerow.service.impl;
 
+import cn.dev33.satoken.stp.SaLoginConfig;
 import cn.dev33.satoken.stp.StpUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -7,6 +8,7 @@ import com.mall.doublerow.entity.vo.UmsMemberVo;
 import com.mall.doublerow.mapper.UmsMemberMapper;
 import com.mall.doublerow.model.UmsMember;
 import com.mall.doublerow.service.UmsMemberService;
+import java.util.Collections;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,11 +37,14 @@ public class UmsMemberServiceImpl extends ServiceImpl<UmsMemberMapper, UmsMember
         List<Map<String, Object>> maps = umsMemberMapper.selectMaps(wrapper);
         if (maps.size() == 1) {
             Map<String, Object> map = maps.get(0);
-            StpUtil.login(map.get("id"));
+            StpUtil.login(map.get("id"), SaLoginConfig
+                    .setExtra("memberId",map.get("id"))
+                    .setExtra("nickname",map.get("nickname"))
+            );
             map.put("token",StpUtil.getTokenValue());
             return map;
         }
-        return null;
+        return Collections.emptyMap();
     }
 
     @Override

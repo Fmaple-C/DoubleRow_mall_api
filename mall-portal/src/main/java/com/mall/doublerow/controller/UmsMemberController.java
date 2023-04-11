@@ -34,7 +34,7 @@ public class UmsMemberController {
 
     @ApiOperation("用户登录")
     @PostMapping("login")
-    public CommonResult login(@Validated @RequestBody UmsMemberVo umsMemberVo) {
+    public CommonResult<Map<String, Object>> login(@Validated @RequestBody UmsMemberVo umsMemberVo) {
         Map<String, Object> login = umsMemberService.login(umsMemberVo);
         if (login != null) {
             return CommonResult.success(login);
@@ -45,9 +45,9 @@ public class UmsMemberController {
 
     @ApiOperation("用户注册")
     @PostMapping("register")
-    public CommonResult register(@Validated @RequestBody UmsMemberVo umsMemberVo) {
-        int regitster = umsMemberService.register(umsMemberVo);
-        if (regitster == 0)
+    public CommonResult<Integer> register(@Validated @RequestBody UmsMemberVo umsMemberVo) {
+        int register = umsMemberService.register(umsMemberVo);
+        if (register == 0)
             return CommonResult.failed("用户名重复，请重新输入");
         else
             return CommonResult.success(null,"注册成功");

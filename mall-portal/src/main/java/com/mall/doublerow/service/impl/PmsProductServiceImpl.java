@@ -72,11 +72,10 @@ public class PmsProductServiceImpl extends ServiceImpl<PmsProductMapper, PmsProd
     public List<PmsProductCategoryNodeDto> categoryTreeList() {
         QueryWrapper<PmsProductCategory> wrapper = new QueryWrapper<>();
         List<PmsProductCategory> allList = pmsProductCategoryMapper.selectList(wrapper);
-        List<PmsProductCategoryNodeDto> result = allList.stream()
+        return allList.stream()
                 .filter(item -> item.getParentId().equals(0L))
                 .map(item -> covert(item, allList))
                 .collect(Collectors.toList());
-        return result;
     }
 
     @Override
@@ -92,7 +91,6 @@ public class PmsProductServiceImpl extends ServiceImpl<PmsProductMapper, PmsProd
         result.setProductAttributeList(pmsProductAttributes);
         //获取商品属性值信息
         if (CollUtil.isNotEmpty(pmsProductAttributes)) {
-            List<Long> attributeIds = pmsProductAttributes.stream().map(PmsProductAttribute::getId).collect(Collectors.toList());
             QueryWrapper<PmsProductAttributeValue> productAttributeValueQueryWrapper = new QueryWrapper<>();
             productAttributeValueQueryWrapper.eq("product_id",pmsProduct.getId());
             List<PmsProductAttributeValue> pmsProductAttributeValues = pmsProductAttributeValueMapper.selectList(productAttributeValueQueryWrapper);
