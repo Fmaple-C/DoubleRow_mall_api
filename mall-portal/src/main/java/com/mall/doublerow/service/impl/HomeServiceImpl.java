@@ -3,13 +3,12 @@ package com.mall.doublerow.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.github.pagehelper.PageHelper;
 import com.mall.doublerow.dao.HomeDao;
-import com.mall.doublerow.entity.dto.HomeContentResultDto;
+import com.mall.doublerow.entity.dto.HomeContentResult;
 import com.mall.doublerow.mapper.PmsProductMapper;
 import com.mall.doublerow.mapper.SmsHomeAdvertiseMapper;
 import com.mall.doublerow.model.PmsProduct;
 import com.mall.doublerow.model.SmsHomeAdvertise;
 import com.mall.doublerow.service.HomeService;
-import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,8 +33,8 @@ public class HomeServiceImpl implements HomeService {
     private HomeDao homeDao;
 
     @Override
-    public HomeContentResultDto content() {
-        HomeContentResultDto result = new HomeContentResultDto();
+    public HomeContentResult content() {
+        HomeContentResult result = new HomeContentResult();
         //获取首页广告
         result.setAdvertiseList(getHomeAdvertiseList());
         //获取新品推荐

@@ -28,8 +28,8 @@ public class OmsCartItemController {
 
     @ApiOperation("获取当前会员的购物车列表")
     @GetMapping("list")
-    public CommonResult<List<OmsCartItem>> list() {
-        List<OmsCartItem> list = omsCartItemService.list(Long.valueOf((String) StpUtil.getLoginId()));
+    public CommonResult<List<OmsCartItem>> list(Long memberId) {
+        List<OmsCartItem> list = omsCartItemService.list(memberId);
         return CommonResult.success(list);
     }
 

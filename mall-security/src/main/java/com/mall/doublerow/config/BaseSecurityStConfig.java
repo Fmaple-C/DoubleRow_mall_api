@@ -6,6 +6,7 @@ import cn.dev33.satoken.router.SaRouter;
 import cn.dev33.satoken.stp.StpLogic;
 import cn.dev33.satoken.stp.StpUtil;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.util.ArrayList;
@@ -15,11 +16,10 @@ import java.util.Map;
 
 /**
  * @ClassName BaseSecurityConfig
- * @Description TODO
  * @Date 2023/3/27 17:10
  * @Version 1.0
  */
-public class BaseSecurityConfig implements WebMvcConfigurer  {
+public class BaseSecurityStConfig implements WebMvcConfigurer  {
     // 注册 Sa-Token 拦截器，打开注解式鉴权功能
 
     /*

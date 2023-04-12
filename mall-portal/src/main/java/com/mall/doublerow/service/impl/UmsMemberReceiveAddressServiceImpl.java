@@ -25,21 +25,20 @@ public class UmsMemberReceiveAddressServiceImpl extends ServiceImpl<UmsMemberRec
 
     @Override
     public int add(UmsMemberReceiveAddress address) {
-        address.setMemberId(Long.valueOf(String.valueOf(StpUtil.getExtra("memberId"))));
         return umsMemberReceiveAddressMapper.insert(address);
     }
 
     @Override
-    public List<UmsMemberReceiveAddress> list() {
+    public List<UmsMemberReceiveAddress> list(Long memberId) {
         QueryWrapper<UmsMemberReceiveAddress> wrapper = new QueryWrapper<>();
-        wrapper.eq("member_id", StpUtil.getExtra("memberId"));
+        wrapper.eq("member_id",memberId);
         return umsMemberReceiveAddressMapper.selectList(wrapper);
     }
 
     @Override
-    public UmsMemberReceiveAddress getItem(Long id) {
+    public UmsMemberReceiveAddress getItem(Long id,Long memberId) {
         QueryWrapper<UmsMemberReceiveAddress> wrapper = new QueryWrapper<>();
-        wrapper.eq("member_id", StpUtil.getExtra("memberId"))
+        wrapper.eq("member_id", memberId)
                 .eq("id",id);
         return umsMemberReceiveAddressMapper.selectOne(wrapper);
     }

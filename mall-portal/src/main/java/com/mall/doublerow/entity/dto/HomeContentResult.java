@@ -16,7 +16,7 @@ import java.util.List;
  */
 @Getter
 @Setter
-public class HomeContentResultDto {
+public class HomeContentResult {
     @ApiModelProperty("轮播广告")
     private List<SmsHomeAdvertise> advertiseList;
     @ApiModelProperty("新品推荐")

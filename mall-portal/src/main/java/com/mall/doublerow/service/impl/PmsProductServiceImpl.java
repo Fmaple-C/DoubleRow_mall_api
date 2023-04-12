@@ -5,9 +5,8 @@ import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.github.pagehelper.PageHelper;
-import com.mall.doublerow.entity.dto.PmsPortalProductDetailDto;
-import com.mall.doublerow.entity.dto.PmsProductCategoryNodeDto;
-import com.mall.doublerow.entity.vo.PmsProductVo;
+import com.mall.doublerow.entity.dto.PmsPortalProductDetail;
+import com.mall.doublerow.entity.dto.PmsProductCategoryNode;
 import com.mall.doublerow.mapper.*;
 import com.mall.doublerow.model.*;
 import com.mall.doublerow.service.PmsProductService;
@@ -69,7 +68,7 @@ public class PmsProductServiceImpl extends ServiceImpl<PmsProductMapper, PmsProd
     }
 
     @Override
-    public List<PmsProductCategoryNodeDto> categoryTreeList() {
+    public List<PmsProductCategoryNode> categoryTreeList() {
         QueryWrapper<PmsProductCategory> wrapper = new QueryWrapper<>();
         List<PmsProductCategory> allList = pmsProductCategoryMapper.selectList(wrapper);
         return allList.stream()
@@ -79,8 +78,8 @@ public class PmsProductServiceImpl extends ServiceImpl<PmsProductMapper, PmsProd
     }
 
     @Override
-    public PmsPortalProductDetailDto detail(Long id) {
-        PmsPortalProductDetailDto result = new PmsPortalProductDetailDto();
+    public PmsPortalProductDetail detail(Long id) {
+        PmsPortalProductDetail result = new PmsPortalProductDetail();
         //获取商品信息
         PmsProduct pmsProduct = pmsProductMapper.selectById(id);
         result.setProduct(pmsProduct);
@@ -96,20 +95,16 @@ public class PmsProductServiceImpl extends ServiceImpl<PmsProductMapper, PmsProd
             List<PmsProductAttributeValue> pmsProductAttributeValues = pmsProductAttributeValueMapper.selectList(productAttributeValueQueryWrapper);
             result.setProductAttributeValueList(pmsProductAttributeValues);
         }
-        QueryWrapper<PmsSkuStock> pmsSkuStockWrapper = new QueryWrapper<>();
-        pmsSkuStockWrapper.eq("product_id",pmsProduct.getId());
-        List<PmsSkuStock> pmsSkuStocks = pmsSkuStockMapper.selectList(pmsSkuStockWrapper);
-        result.setSkuStockList(pmsSkuStocks);
         return result;
     }
 
     /**
      * 初始对象转化为节点对象
      */
-    private PmsProductCategoryNodeDto covert(PmsProductCategory item, List<PmsProductCategory> allList) {
-        PmsProductCategoryNodeDto node = new PmsProductCategoryNodeDto();
+    private PmsProductCategoryNode covert(PmsProductCategory item, List<PmsProductCategory> allList) {
+        PmsProductCategoryNode node = new PmsProductCategoryNode();
         BeanUtils.copyProperties(item, node);
-        List<PmsProductCategoryNodeDto> children = allList.stream()
+        List<PmsProductCategoryNode> children = allList.stream()
                 .filter(subItem -> subItem.getParentId().equals(item.getId()))
                 .map(subItem -> covert(subItem, allList)).collect(Collectors.toList());
         node.setChildren(children);

@@ -1,13 +1,9 @@
 package com.mall.doublerow.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.mall.doublerow.entity.dto.PmsPortalProductDetailDto;
-import com.mall.doublerow.entity.dto.PmsProductCategoryNodeDto;
-import com.mall.doublerow.entity.vo.PmsProductVo;
-import com.mall.doublerow.mapper.PmsProductMapper;
+import com.mall.doublerow.entity.dto.PmsPortalProductDetail;
+import com.mall.doublerow.entity.dto.PmsProductCategoryNode;
 import com.mall.doublerow.model.PmsProduct;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -28,10 +24,10 @@ public interface PmsProductService extends IService<PmsProduct> {
     /**
      * 以树形结构获取所有商品分类
      */
-    List<PmsProductCategoryNodeDto> categoryTreeList();
+    List<PmsProductCategoryNode> categoryTreeList();
 
     /**
      * 获取前台商品详情
      */
-    PmsPortalProductDetailDto detail(Long id);
+    PmsPortalProductDetail detail(Long id);
 }

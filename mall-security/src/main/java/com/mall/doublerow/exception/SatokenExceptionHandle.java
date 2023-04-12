@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
  * @Date 2023/2/18 11:15
  * @Version 1.0
  */
-@RestControllerAdvice
+//@RestControllerAdvice
 public class SatokenExceptionHandle {
 
     @ExceptionHandler(SaTokenException.class)

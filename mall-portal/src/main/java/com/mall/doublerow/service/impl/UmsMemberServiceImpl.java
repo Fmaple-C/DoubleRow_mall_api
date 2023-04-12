@@ -5,10 +5,14 @@ import cn.dev33.satoken.stp.StpUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.mall.doublerow.entity.vo.UmsMemberVo;
+import com.mall.doublerow.exception.Asserts;
 import com.mall.doublerow.mapper.UmsMemberMapper;
 import com.mall.doublerow.model.UmsMember;
 import com.mall.doublerow.service.UmsMemberService;
+
 import java.util.Collections;
+
+import com.mall.doublerow.util.JwtUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,7 +27,7 @@ import java.util.Map;
  * @Version 1.0
  */
 @Service
-public class UmsMemberServiceImpl extends ServiceImpl<UmsMemberMapper, UmsMember> implements UmsMemberService{
+public class UmsMemberServiceImpl extends ServiceImpl<UmsMemberMapper, UmsMember> implements UmsMemberService {
 
     @Autowired
     private UmsMemberMapper umsMemberMapper;
@@ -31,17 +35,14 @@ public class UmsMemberServiceImpl extends ServiceImpl<UmsMemberMapper, UmsMember
     @Override
     public Map<String, Object> login(UmsMemberVo umsMemberVo) {
         QueryWrapper<UmsMember> wrapper = new QueryWrapper<>();
-        wrapper.select("id","nickname","phone","icon","gender","birthday","city","job","personalized_signature")
-                .eq("username",umsMemberVo.getUsername())
-                .eq("password",umsMemberVo.getPassword());
+        wrapper.select("id", "nickname", "phone", "icon", "gender", "birthday", "city", "job", "personalized_signature")
+                .eq("username", umsMemberVo.getUsername())
+                .eq("password", umsMemberVo.getPassword());
         List<Map<String, Object>> maps = umsMemberMapper.selectMaps(wrapper);
         if (maps.size() == 1) {
             Map<String, Object> map = maps.get(0);
-            StpUtil.login(map.get("id"), SaLoginConfig
-                    .setExtra("memberId",map.get("id"))
-                    .setExtra("nickname",map.get("nickname"))
-            );
-            map.put("token",StpUtil.getTokenValue());
+            String token = JwtUtils.createToken(String.valueOf(map.get("id")));
+            map.put("token",token);
             return map;
         }
         return Collections.emptyMap();
@@ -50,15 +51,14 @@ public class UmsMemberServiceImpl extends ServiceImpl<UmsMemberMapper, UmsMember
     @Override
     public int register(UmsMemberVo umsMemberVo) {
         QueryWrapper<UmsMember> wrapper = new QueryWrapper<>();
-        wrapper.eq("username",umsMemberVo.getUsername());
+        wrapper.eq("username", umsMemberVo.getUsername());
         UmsMember selectOne = umsMemberMapper.selectOne(wrapper);
         if (selectOne != null) {
-            return 0;
+            Asserts.fail("用户名重复");
         }
-        else {
-            UmsMember umsMember = new UmsMember();
-            BeanUtils.copyProperties(umsMemberVo,umsMember);
-            return umsMemberMapper.insert(umsMember);
-        }
+        UmsMember umsMember = new UmsMember();
+        BeanUtils.copyProperties(umsMemberVo, umsMember);
+        return umsMemberMapper.insert(umsMember);
+
     }
 }

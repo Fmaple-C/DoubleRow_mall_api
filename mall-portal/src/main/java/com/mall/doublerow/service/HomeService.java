@@ -1,6 +1,6 @@
 package com.mall.doublerow.service;
 
-import com.mall.doublerow.entity.dto.HomeContentResultDto;
+import com.mall.doublerow.entity.dto.HomeContentResult;
 import com.mall.doublerow.model.PmsProduct;
 
 import java.util.List;
@@ -16,7 +16,7 @@ public interface HomeService {
     /**
      * 获取首页内容
      */
-    HomeContentResultDto content();
+    HomeContentResult content();
 
     /**
      * 首页商品推荐

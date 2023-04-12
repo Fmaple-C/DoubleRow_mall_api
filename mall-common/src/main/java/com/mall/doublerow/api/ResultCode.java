@@ -8,6 +8,7 @@ public enum ResultCode implements IErrorCode{
     UNAUTHORIZED(401, "暂未登录或token已经过期"),
     FORBIDDEN(403, "没有相关权限");
 
+
     private long status;
     private String message;
 

@@ -14,6 +14,6 @@ import org.springframework.context.annotation.Configuration;
 *@Return 注入Sa-tokenConfig
 **/
 @Configuration
-public class QuestionnairesSatokenConfig extends BaseSecurityConfig{
+public class QuestionnairesSatokenConfig extends BaseSecurityJwtConfig{
 
 }

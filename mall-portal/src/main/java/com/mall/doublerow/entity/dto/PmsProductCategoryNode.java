@@ -2,7 +2,6 @@ package com.mall.doublerow.entity.dto;
 
 import com.mall.doublerow.model.PmsProductCategory;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,7 +13,7 @@ import java.util.List;
  */
 @Getter
 @Setter
-public class PmsProductCategoryNodeDto extends PmsProductCategory {
+public class PmsProductCategoryNode extends PmsProductCategory {
     @ApiModelProperty("子分类集合")
-    private List<PmsProductCategoryNodeDto> children;
+    private List<PmsProductCategoryNode> children;
 }

@@ -39,8 +39,7 @@ public class UmsMemberController {
         if (login != null) {
             return CommonResult.success(login);
         }
-        else
-            return CommonResult.failed();
+        return CommonResult.failed();
     }
 
     @ApiOperation("用户注册")

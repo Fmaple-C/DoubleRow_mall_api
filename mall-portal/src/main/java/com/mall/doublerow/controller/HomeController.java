@@ -1,7 +1,7 @@
 package com.mall.doublerow.controller;
 
 import com.mall.doublerow.api.CommonResult;
-import com.mall.doublerow.entity.dto.HomeContentResultDto;
+import com.mall.doublerow.entity.dto.HomeContentResult;
 import com.mall.doublerow.service.HomeService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -26,8 +26,8 @@ public class HomeController {
 
     @ApiOperation("首页内容信息展示")
     @GetMapping("content")
-    public CommonResult<HomeContentResultDto> content() {
-        HomeContentResultDto contentResult = homeService.content();
+    public CommonResult<HomeContentResult> content() {
+        HomeContentResult contentResult = homeService.content();
         return CommonResult.success(contentResult);
     }
 

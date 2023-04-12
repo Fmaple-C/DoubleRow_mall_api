@@ -18,11 +18,9 @@ import java.util.List;
  */
 @Getter
 @Setter
-public class PmsPortalProductDetailDto {
+public class PmsPortalProductDetail {
     @ApiModelProperty("商品信息")
     private PmsProduct product;
-    @ApiModelProperty("商品的sku库存信息")
-    private List<PmsSkuStock> skuStockList;
     @ApiModelProperty("商品属性与参数")
     private List<PmsProductAttribute> productAttributeList;
     @ApiModelProperty("手动录入的商品属性与参数值")

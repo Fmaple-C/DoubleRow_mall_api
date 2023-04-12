@@ -15,11 +15,11 @@ public interface UmsMemberReceiveAddressService extends IService<UmsMemberReceiv
     /**
      * 返回当前用户的收货地址
      */
-    List<UmsMemberReceiveAddress> list();
+    List<UmsMemberReceiveAddress> list(Long memberId);
 
     /**
      * 获取地址详情
      * @param id 地址id
      */
-    UmsMemberReceiveAddress getItem(Long id);
+    UmsMemberReceiveAddress getItem(Long id,Long memberId);
 }

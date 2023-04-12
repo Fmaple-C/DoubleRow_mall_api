@@ -2,14 +2,12 @@ package com.mall.doublerow.controller;
 
 import com.mall.doublerow.api.CommonPage;
 import com.mall.doublerow.api.CommonResult;
-import com.mall.doublerow.entity.dto.PmsPortalProductDetailDto;
-import com.mall.doublerow.entity.dto.PmsProductCategoryNodeDto;
-import com.mall.doublerow.entity.vo.PmsProductVo;
+import com.mall.doublerow.entity.dto.PmsPortalProductDetail;
+import com.mall.doublerow.entity.dto.PmsProductCategoryNode;
 import com.mall.doublerow.model.PmsProduct;
 import com.mall.doublerow.service.PmsProductService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,15 +46,15 @@ public class PmsProductController {
 
     @ApiOperation("以树形结构获取所有商品分类")
     @GetMapping("categoryTreeList")
-    public CommonResult<List<PmsProductCategoryNodeDto>> categoryTreeList() {
-        List<PmsProductCategoryNodeDto> list = productService.categoryTreeList();
+    public CommonResult<List<PmsProductCategoryNode>> categoryTreeList() {
+        List<PmsProductCategoryNode> list = productService.categoryTreeList();
         return CommonResult.success(list);
     }
 
     @ApiOperation("获取前台商品详情")
     @GetMapping("/detail/{id}")
-    public CommonResult<PmsPortalProductDetailDto> detail(@PathVariable Long id) {
-        PmsPortalProductDetailDto productDetail = productService.detail(id);
+    public CommonResult<PmsPortalProductDetail> detail(@PathVariable Long id) {
+        PmsPortalProductDetail productDetail = productService.detail(id);
         return CommonResult.success(productDetail);
     }
 }

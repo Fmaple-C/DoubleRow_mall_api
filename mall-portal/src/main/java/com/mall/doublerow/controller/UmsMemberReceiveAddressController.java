@@ -38,14 +38,14 @@ public class UmsMemberReceiveAddressController {
 
     @ApiOperation("返回当前用户的收货地址")
     @GetMapping("list")
-    public CommonResult<List<UmsMemberReceiveAddress>> list() {
-        return CommonResult.success(umsMemberReceiveAddressService.list());
+    public CommonResult<List<UmsMemberReceiveAddress>> list(Long memberId) {
+        return CommonResult.success(umsMemberReceiveAddressService.list(memberId));
     }
 
     @ApiOperation("返回当前用户的收货地址")
     @GetMapping("getItem")
-    public CommonResult<UmsMemberReceiveAddress> getItem(Long id) {
-        return CommonResult.success(umsMemberReceiveAddressService.getItem(id));
+    public CommonResult<UmsMemberReceiveAddress> getItem(Long id,Long memberId) {
+        return CommonResult.success(umsMemberReceiveAddressService.getItem(id,memberId));
     }
 
 }
