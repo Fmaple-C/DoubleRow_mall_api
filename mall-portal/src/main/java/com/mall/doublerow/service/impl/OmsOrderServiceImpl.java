@@ -35,10 +35,7 @@ public class OmsOrderServiceImpl extends ServiceImpl<OmsOrderMapper, OmsOrder> i
     private OmsOrderItemMapper omsOrderItemMapper;
 
     @Override
-    public CommonPage<OmsOrderDetail> listAll(Long memberId,Integer status, Integer pageNum, Integer pageSize) {
-        if(status==-1){
-            status = null;
-        }
+    public CommonPage<OmsOrderDetail> listAll(Long memberId,Integer pageNum, Integer pageSize) {
         PageHelper.startPage(pageNum,pageSize);
         QueryWrapper<OmsOrder> orderwrapper = new QueryWrapper<>();
         orderwrapper.eq("delete_status",0)
@@ -52,7 +49,7 @@ public class OmsOrderServiceImpl extends ServiceImpl<OmsOrderMapper, OmsOrder> i
         resultPage.setPageSize(orderPage.getPageSize());
         resultPage.setTotal(orderPage.getTotal());
         resultPage.setTotalPage(orderPage.getTotalPage());
-        if (CollUtil.isNotEmpty(omsOrders))
+        if (CollUtil.isEmpty(omsOrders))
             return resultPage;
         List<Long> orderIdds = omsOrders.stream().map(OmsOrder::getId).collect(Collectors.toList());
         QueryWrapper<OmsOrderItem> itemwrapper = new QueryWrapper<>();

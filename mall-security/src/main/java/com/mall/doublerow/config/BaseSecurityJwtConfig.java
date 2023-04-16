@@ -44,6 +44,7 @@ public class BaseSecurityJwtConfig implements WebMvcConfigurer {
         urls.add("/swagger-resources/**");
         urls.add("/webjars/**");
         urls.add("/swagger-ui.html/**");
+        urls.add("/swagger-ui/**");
         urls.add("/v2/**");
         return urls;
     }

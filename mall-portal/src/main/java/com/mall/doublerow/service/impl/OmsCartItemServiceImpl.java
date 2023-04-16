@@ -35,8 +35,8 @@ public class OmsCartItemServiceImpl  extends ServiceImpl<OmsCartItemMapper, OmsC
     @Override
     public int add(OmsCartItem cartItem) {
         int count = 0;
-        cartItem.setMemberId(Long.valueOf(String.valueOf(StpUtil.getExtra("memberId"))));
-        cartItem.setMemberNickname(String.valueOf(StpUtil.getExtra("nickname")));
+        cartItem.setMemberId(cartItem.getMemberId());
+        cartItem.setMemberNickname(cartItem.getMemberNickname());
         cartItem.setDeleteStatus(0);
         OmsCartItem existCartItem = getCartItem(cartItem);
         if (existCartItem == null) {

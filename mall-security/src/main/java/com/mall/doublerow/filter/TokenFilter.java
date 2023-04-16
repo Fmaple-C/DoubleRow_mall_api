@@ -10,12 +10,9 @@ import org.springframework.web.servlet.HandlerInterceptor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.PrintWriter;
 
 /**
  * @ClassName TokenFilter
- * @Description TODO
  * @Date 2023/4/12 15:30
  * @Version 1.0
  */
@@ -30,7 +27,6 @@ public class TokenFilter implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String token = request.getHeader("token");
-        System.out.println(token);
         if (null == token||"".equals(token)) {
             throw new ApiException(ResultCode.UNAUTHORIZED);
         }
