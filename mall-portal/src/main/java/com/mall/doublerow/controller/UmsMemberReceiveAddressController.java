@@ -42,10 +42,24 @@ public class UmsMemberReceiveAddressController {
         return CommonResult.success(umsMemberReceiveAddressService.list(memberId));
     }
 
-    @ApiOperation("返回当前用户的收货地址")
+    @ApiOperation("返回当前用户的收货地址详情")
     @GetMapping("getItem")
     public CommonResult<UmsMemberReceiveAddress> getItem(Long id,Long memberId) {
         return CommonResult.success(umsMemberReceiveAddressService.getItem(id,memberId));
+    }
+
+    @ApiOperation("修改用户地址")
+    @PutMapping("update")
+    public CommonResult update(@RequestBody UmsMemberReceiveAddress umsMemberReceiveAddress){
+        boolean b = umsMemberReceiveAddressService.updateById(umsMemberReceiveAddress);
+        return b ? CommonResult.success("修改成功") : CommonResult.failed();
+    }
+
+    @ApiOperation("删除用户地址")
+    @DeleteMapping("delete")
+    public CommonResult delete(@RequestBody Long id){
+        boolean b = umsMemberReceiveAddressService.removeById(id);
+        return b ? CommonResult.success(null) : CommonResult.failed();
     }
 
 }

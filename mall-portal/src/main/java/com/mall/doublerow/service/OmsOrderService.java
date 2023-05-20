@@ -16,4 +16,6 @@ import java.util.List;
 public interface OmsOrderService extends IService<OmsOrder> {
 
     CommonPage<OmsOrderDetail> listAll(Long memberId, Integer pageNum, Integer pageSize);
+
+
 }
